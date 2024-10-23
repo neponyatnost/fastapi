@@ -1,0 +1,36 @@
+[
+    {
+        "label": "FastAPI",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "Enum",
+        "importPath": "enum",
+        "description": "enum",
+        "isExtraImport": true,
+        "detail": "enum",
+        "documentation": {}
+    },
+    {
+        "label": "BlogType",
+        "kind": 6,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "class BlogType(str, Enum):\n    tech = 'tech'\n    health = 'health'\n    news = 'news'\n@app.get('/blog/type/{type}')\nasync def get_blog_type(type: BlogType):\n    return {'type': type}\n@app.get('/blog/{id}')\nasync def get_blog(id: int):\n    return {'id': id}",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "app = FastAPI(\n    title='Test API'\n)\n@app.get('/')\nasync def index():\n    return 'Index page'\n# @app.get('/blog/all', )\n# async def get_blog_all():\n#     return {'message': 'All blogs provided'}\n@app.get('/blog/all')",
+        "detail": "main",
+        "documentation": {}
+    }
+]
