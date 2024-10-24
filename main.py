@@ -1,12 +1,12 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
-from routers import blog_get, blog_post, user, article, product, file
+from fastapi.staticfiles import StaticFiles
 from auth import authentication
+from routers import blog_get, blog_post, user, article, product, file
 from db import models
 from db.database import engine
 from exceptions import StoryException
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles
 
 # Create FastAPI instance
 app = FastAPI(
@@ -27,7 +27,7 @@ app.include_router(blog_post.router)
 async def index():
     return 'Index page'
 
-
+# Exception handler for StoryException class
 @app.exception_handler(StoryException)
 def story_exception_handler(request: Request, exc: StoryException):
     return JSONResponse(
@@ -37,14 +37,15 @@ def story_exception_handler(request: Request, exc: StoryException):
         }
     )
 
-
+# Create tables in database
 models.Base.metadata.create_all(bind=engine)
 
-
+# Define origins for CORS
 origins = [
     'http://localhost:3000',
 ]
 
+# Add CORS middleware to FastAPI instance
 app.add_middleware(
     CORSMiddleware,
     allow_origins = origins,
